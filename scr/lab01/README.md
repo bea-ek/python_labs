@@ -11,7 +11,7 @@
 
 вычисляет значения по формулам и выводит строки с равной шириной
 
-![alt text](../../images/lab01/04_minutes_to_hhmm.png)
+![alt text](../../images/lab01/03_discount_vat.png)
 
 ### Задание 4
 
