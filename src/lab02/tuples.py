@@ -40,7 +40,7 @@ def format_record(rec: tuple[str,str,float]) -> str:
     name =  [x.capitalize() for x in rec[0].split()]
     for i in range(1,len(name)):
         name[i]=name[i][0]+'.'
-    return f'{' '.join(name)}, гр. {rec[1]}, GPA {float(rec[2]):.2f}'
+    return f'{name[0]} {''.join(name[1:])}, гр. {rec[1]}, GPA {float(rec[2]):.2f}'
 
 
 #тесты
@@ -50,3 +50,4 @@ print(f'''
 ("Петров Пётр Петрович", "IKBO-12", 5.0) -> {format_record(("Петров Пётр Петрович", "IKBO-12", 5.0))}
 ("  сидорова  анна   сергеевна ", "ABB-01", 3.999) -> {format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.999))}
 ''')
+print(f'("Иван", "БИВТ-2", 3.0) -> {format_record(("Иван", "БИВТ-2", 3.0))}')
