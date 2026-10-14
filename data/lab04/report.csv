@@ -1,1 +1,7 @@
 word,count
+привет,2
+мир,1
+
+
+
+python3 -m src/lab04/text_report --in data/a.txt data/b.txt --per-file data/report_per_file.csv --total data/report_total.csv
