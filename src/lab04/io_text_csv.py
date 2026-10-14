@@ -15,7 +15,7 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
     '''
 
     try:
-        with open(path, encoding="utf-8") as f:
+        with open(path, encoding=encoding) as f:
             text = f.read()
             return text
     except FileNotFoundError:
