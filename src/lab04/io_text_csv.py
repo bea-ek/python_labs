@@ -13,9 +13,9 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
     Returns:
         Содержимое файла в виде строки
     '''
-
+    
     try:
-        with open(path, encoding=encoding) as f:
+        with open(path, "r", encoding=encoding) as f:
             text = f.read()
             return text
     except FileNotFoundError:
@@ -36,7 +36,7 @@ def ensure_parent_dir(path: str | Path) -> None:
         None
     '''
     
-    Path(path).parent.mkdir(parents=True, exist_ok=True)       
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
     
     
 def write_csv(rows: Iterable[Sequence], path: str | Path,
@@ -54,15 +54,14 @@ def write_csv(rows: Iterable[Sequence], path: str | Path,
             ValueError: Строки разной длинны
     '''
     
-    p = Path(path)
     rows = list(rows)
     if rows:
         etalon = len(rows[0])
         for r in rows:
             if len(r) != etalon:
                 raise ValueError('Строки разной длинны')
-    ensure_parent_dir(p)
-    with p.open('w', newline="", encoding="utf-8") as f:
+    ensure_parent_dir(path)
+    with open(path, 'w', newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         if header is not None:
             w.writerow(header)
