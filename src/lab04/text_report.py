@@ -35,17 +35,20 @@ if flag:
     
     write_csv(per_sorted_freqs, args.per_file, ("file","word","count"))
     write_csv(all_sorted_freqs, args.total, ("word","count"))
-    print(f'Всего слов : {sum([i[1] for i in all_sorted_freqs])}\nУникальных слов: {len(all_sorted_freqs)}\nТоп-5:')
-    for val in all_sorted_freqs[:5]:
-        print(f'{val[0]}: {val[1]}')
+    freqs_to_print = all_sorted_freqs
 else:
     write_csv(sorted_freqs, args.output_file, ("word","count"))
-    print(f'Всего слов : {sum([i[1] for i in sorted_freqs])}\nУникальных слов: {len(sorted_freqs)}\nТоп-5:')
-    for val in sorted_freqs[:5]:
-        print(f'{val[0]}: {val[1]}')
-    
-    
+    freqs_to_print = sorted_freqs
 
+print(f'Всего слов : {sum([i[1] for i in freqs_to_print])}\nУникальных слов: {len(freqs_to_print)}\nТоп-5:')
 
+max_len = max([len(val[0]) for val in freqs_to_print[:5]] + [len('слово')])
+head = f'{"слово":<{max_len}} | частота'
+
+print(head)
+print('-' * len(head))
+for val in freqs_to_print[:5]:
+        print(f'{val[0]:<{max_len}} | {val[1]}')
+print('...')
 
 # python3 -m src.lab04.text_report --in data/lab04/a.txt data/lab04/b.txt --per-file data/lab04/report_per_file.csv --total data/lab04/report_total.csv
