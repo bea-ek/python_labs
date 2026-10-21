@@ -18,7 +18,7 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
 
     Args:
         path: Путь к файлу в формате строки или Path
-        encoding: Тип кодировки файла (пример: encoding="cp1251"), по умолчанию utf-8
+        encoding: Тип кодировки файла (пример: encoding ="cp1251"), по умолчанию utf-8
 
     Returns:
         Содержимое файла в виде строки

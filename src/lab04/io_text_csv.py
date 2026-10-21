@@ -18,11 +18,11 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
         with open(path, "r", encoding=encoding) as f:
             text = f.read()
             return text
-    except FileNotFoundError:
-        print(f"файл не найден: {path}", file=sys.stderr)
+    except FileNotFoundError as e:
+        print(f"{e} файл не найден: {path}", file=sys.stderr)
         sys.exit(1)
-    except UnicodeDecodeError:
-        print(f"кодировка не подходит: {path}", file=sys.stderr)
+    except UnicodeDecodeError as e:
+        print(f"{e} кодировка не подходит: {path}", file=sys.stderr)
         sys.exit(1)
         
     
