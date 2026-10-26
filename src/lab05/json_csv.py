@@ -2,37 +2,109 @@ import csv
 import json
 from pathlib import Path
 from typing import Iterable, Sequence
+from src.lab04.io_text_csv import ensure_parent_dir
 import sys
 
 
 def json_to_csv(json_path: str, csv_path: str) -> None:
-    """
-    Преобразует JSON-файл в CSV.
-    Поддерживает список словарей [{...}, {...}], заполняет отсутствующие поля пустыми строками.
-    Кодировка UTF-8. Порядок колонок — по алфавиту.
-    """
-    try:
-        with open(json_path, "r", encoding="utf-8") as j_f:
-            data = json.load(j_f)
-    except FileNotFoundError:
-        print(f"файл не найден: {json_path}", file=sys.stderr)
-        sys.exit(1)
-    except UnicodeDecodeError:
-        print(f"кодировка не подходит: {json_path}", file=sys.stderr)
-        sys.exit(1)
-    except json.decoder.JSONDecodeError as e:
-        print("Битый json: {e.msg}, {e.lineno}", file = sys.stderr)
-        sys.exit(1)
+    '''Записывает значения
 
+    Args:
+        json_path: Путь к json файлу из которого читаем
+        csv_path: Путь к csv файлу куда пишем
+
+    Returns: 
+        None
+
+    Raises:
+        FileNotFoundError: 
+            Указанный JSON файл не найден
+        ValueError:
+            Указанный файл не формата JSON
+            Пустой JSON или неподдерживаемая структура
+            Файл JSON пустой или имеет неправильный формат
+            Все элементы списка JSON должны быть словарями
+    '''
+    j_p = Path(json_path)
+    c_p = Path(csv_path)
+    
+    if not j_p.exists():
+        raise FileNotFoundError(f"файл не найден: {j_p}")
+    if j_p.suffix.lower() != '.json':
+        raise ValueError(f"Указанный файл не формата JSON: {j_p}")
+    
+
+    with j_p.open('r', encoding='utf-8') as j_f:
+        try:
+            data = json.load(j_f)
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Файл содержит некорректный JSON: {e.lineno}, {e.msg}")
+        if not isinstance(data,list) or len(data) == 0:
+            raise ValueError("Файл JSON пустой или имеет неправильный формат")
+        if not all(isinstance(x, dict) for x in data):
+            raise ValueError("Все элементы списка JSON должны быть словарями")
         
-json_to_csv("data/lab05/people.json","data/lab05/cities.csv")    
- 
+    ensure_parent_dir(c_p)
+    # порядок колонок определяется их первым появлением в JSON
+    headers = []
+    for item in data:
+        for key in item.keys():
+            if key not in headers:
+                headers.append(key)
+            
+    with open(c_p, 'w', newline="", encoding="utf-8") as c_f:
+            #restval - заполняет отсутствующие поля пустыми строками
+            writer = csv.DictWriter(c_f, fieldnames=headers, restval="")
+            writer.writeheader()
+            writer.writerows(data)
+        
+json_to_csv("data/lab05/people.json","data/lab05/people.csv")    
 def csv_to_json(csv_path: str, json_path: str) -> None:
-    """
-    Преобразует CSV в JSON (список словарей).
-    Заголовок обязателен, значения сохраняются как строки.
-    json.dump(..., ensure_ascii=False, indent=2)
-    """
-    with open(csv_path, "w", encoding = "utf-8") as c_f:
-        rows = csv.DictReader(c_f)
+    '''Записывает значения
+
+    Args:
+        csv_path: Путь к csv файлу из которого читаем
+        json_path: Путь к json файлу куда пишем
         
+    Returns: 
+        None
+
+    Raises:
+        FileNotFoundError: 
+            Указанный CSV файл не найден
+        ValueError:
+            Указанный файл не формата CSV
+            ПCSV файл пустой
+    '''
+    
+    j_p = Path(json_path)
+    c_p = Path(csv_path)
+    
+    if not c_p.exists():
+        raise FileNotFoundError(f"Указанный CSV файл не найден: {c_p}")
+    
+    if c_p.suffix.lower() != '.csv':
+        raise ValueError(f"Указанный файл не формата CSV: {c_p}")
+    
+
+    with open(c_p, 'r', encoding='utf-8') as c_f:
+        reader = csv.DictReader(c_f)
+        if reader.fieldnames is None:
+            raise ValueError("CSV файл пустой")
+        data = list(reader)
+        
+    ensure_parent_dir(j_p)
+            
+    with j_p.open('w', encoding="utf-8") as j_f:
+        json.dump(data, j_f, ensure_ascii=False, indent=2)
+        
+
+# csv_to_json("data/lab05/people.csv","data/lab05/people.json")
+
+# name,age,city
+# Alice,22,SPB
+# Bob,25,Moscow
+# Carlos,30,Kazan
+# Dana,21,SPB
+# Andrey,27,Novosibirsk
+
