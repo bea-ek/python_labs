@@ -45,9 +45,11 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
     ensure_parent_dir(c_p)
     # порядок колонок определяется их первым появлением в JSON
     headers = []
+    seen = set()
     for item in data:
         for key in item.keys():
-            if key not in headers:
+            if key not in seen:
+                seen.add(key)
                 headers.append(key)
             
     with open(c_p, 'w', newline="", encoding="utf-8") as c_f:
@@ -117,7 +119,7 @@ json_to_csv(
     "data/lab05/out/pets_from_json.csv",
 )
 
-csv_to_json(
-    "data/lab05/samples/pets.csv",
-    "data/lab05/out/pets_from_csv.json",
-)
+# csv_to_json(
+#     "data/lab05/samples/pets.csv",
+#     "data/lab05/out/pets_from_csv.json",
+# )
