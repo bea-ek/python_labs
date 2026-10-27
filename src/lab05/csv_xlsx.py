@@ -62,7 +62,7 @@ def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
 #     "data/lab05/out/cities.xlsx",
 # )
 
-csv_to_xlsx(
-    "data/lab05/samples/students.csv",
-    "data/lab05/out/students.xlsx",
-)
+# csv_to_xlsx(
+#     "data/lab05/samples/students.csv",
+#     "data/lab05/out/students.xlsx",
+# )

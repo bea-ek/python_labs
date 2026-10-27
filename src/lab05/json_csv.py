@@ -114,10 +114,10 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
 # )
 
 ## Мои тесты
-json_to_csv(
-    "data/lab05/samples/pets.json",
-    "data/lab05/out/pets_from_json.csv",
-)
+# json_to_csv(
+#     "data/lab05/samples/pets.json",
+#     "data/lab05/out/pets_from_json.csv",
+# )
 
 # csv_to_json(
 #     "data/lab05/samples/pets.csv",

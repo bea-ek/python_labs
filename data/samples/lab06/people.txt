@@ -1,0 +1,6 @@
+Alice,  22,SPB
+Bob,25,Moscow
+Bob,25,     Moscow
+Carlos,30,Kazan
+    Dana,25,SPB
+Andrey,27,Novosibirsk
