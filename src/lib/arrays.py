@@ -37,13 +37,13 @@ def flatten(mat: list[list | tuple]) -> list:
     
     flatten([[1, 2], (3, 4, 5)]) -> [1, 2, 3, 4, 5]"""
     
-    res=[]
+    nums=[]
     for row in mat:
         if not isinstance(row, (list, tuple)):
             raise TypeError("Row is not list or tuple")
-        res.extend(row)
+        nums.extend(row)
         
-    return res
+    return nums
 
 
 # #Тесты

@@ -8,12 +8,12 @@ def main():
     subparsers = parser.add_subparsers(dest="command")
 
     # подкоманда cat
-    cat_parser = subparsers.add_parser("cat")
+    cat_parser = subparsers.add_parser("cat", help="анализ частот слов в тексте")
     cat_parser.add_argument("--input", required=True)
     cat_parser.add_argument("-n", action="store_true", help="Нумеровать строки")
 
     # подкоманда stats
-    stats_parser = subparsers.add_parser("stats")
+    stats_parser = subparsers.add_parser("stats", help="вывод содержимого файла построчно")
     stats_parser.add_argument("--input", required=True)
     stats_parser.add_argument("--top", type=int, default=5, help="Количество позиций в топе")
 
