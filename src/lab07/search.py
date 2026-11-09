@@ -1,10 +1,13 @@
 def linear_search(nums, x) -> int:
-    for i,j in enumerate(nums):
-        if j == x:
+    """Возвращает индекс первого вхождения x или -1."""
+    for i in range(len(nums)):
+        if nums[i] == x:
             return i
     return -1
 
 def binary_search(sorted_nums, x) -> int:
+    """Ищет x  в отсортированном списке.
+    Для неотсортированного списка результат не определен."""
     lo=0
     hi=len(sorted_nums)-1
     while lo<=hi:
@@ -20,6 +23,7 @@ def binary_search(sorted_nums, x) -> int:
     return -1
 
 def two_sum_brute(nums, target):
+    """Ищет пару индексов таких чисел, сумма которых равна target."""
     for i in range(len(nums)):
         for j in range(i+1, len(nums)):
             if nums[i]+nums[j]==target:
@@ -29,6 +33,7 @@ def two_sum_brute(nums, target):
 
 
 def two_sum_fast(nums, target):
+    """Ищет пару индексов таких чисел, сумма которых равна target за один проход со словарём."""
     seen = {}
     for i,x in enumerate(nums):
         if target-x in seen:

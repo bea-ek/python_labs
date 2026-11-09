@@ -1,4 +1,5 @@
 def bubble_sort(nums) -> list:
+    """Новый список, отсортированный по возрастанию пузырьком. Исходный не меняется."""
     nums = list(nums)
     n = len(nums)
     for i in range(n-1):
@@ -12,6 +13,7 @@ def bubble_sort(nums) -> list:
     return nums
 
 def insertion_sort(nums) -> list:
+    """Новый список, отсортированный по возрастанию вставками. Исходный не меняется."""
     nums = list(nums)
     for i in range(1,len(nums)):
         key = nums[i]
@@ -23,6 +25,7 @@ def insertion_sort(nums) -> list:
     return nums
 
 def selection_sort(nums) -> list:
+    """Новый список, отсортированный по возрастанию выбором. Исходный не меняется."""
     nums = list(nums)
     for i in range(len(nums)):
         m=i
