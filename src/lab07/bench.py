@@ -71,7 +71,7 @@ def bench_search():
 def main():
     header = ("task", "n", "func", "seconds")
     rows=[]
-    for i in (1_000,10_000):
+    for i in (1_000,10_000,100_000):
         rows.extend(bench_sorts(i))
     rows.extend(bench_search())
 
