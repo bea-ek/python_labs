@@ -29,7 +29,7 @@ def bench_sorts(n):
             t = timeit.timeit(lambda: fn(data), number=1)
             rows.append(("sort", n, fn.__name__, f"{t:.6f}"))
         else:
-            rows.append(("search", 10_000, fn.__name__, ">60"))
+            rows.append(("search", 100_000, fn.__name__, ">60"))
     return rows
 
 def bench_search():

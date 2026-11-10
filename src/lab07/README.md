@@ -383,26 +383,30 @@ if __name__ == "__main__":
 
 * *В терминал*
 
-![alt text](../../images/lab_07/bench_terminal.png)
+![alt text](../../images/lab07/bench_terminal.png)
 
 * *В bench.csv*
 
 ```
 task,n,func,seconds
-sort,1000,sorted,0.000150
-sort,1000,bubble_sort,0.001413
-sort,1000,insertion_sort,0.000784
-sort,1000,selection_sort,0.001033
-sort,10000,sorted,0.000127
-sort,10000,bubble_sort,0.003149
-sort,10000,insertion_sort,0.000849
-sort,10000,selection_sort,0.000627
-search,10000,index,9.370492
-search,100000,linear_search,27.791950
-search,100000,sort_before_binary,0.063861
-search,100000,binary_search,0.027524
-search,1000,two_sum_brute,0.001185
-search,1000,two_sum_fast,0.000159
-search,10000,two_sum_brute,0.730709
-search,10000,two_sum_fast,0.000820
+sort,1000,sorted,0.000117
+sort,1000,bubble_sort,0.002198
+sort,1000,insertion_sort,0.000949
+sort,1000,selection_sort,0.001241
+sort,10000,sorted,0.000092
+sort,10000,bubble_sort,0.000878
+sort,10000,insertion_sort,0.000397
+sort,10000,selection_sort,0.000814
+search,100000,sorted,>60
+search,100000,bubble_sort,>60
+search,100000,insertion_sort,>60
+search,100000,selection_sort,>60
+search,10000,index,9.080952
+search,10000,linear_search,17.272889
+search,10000,sort_before_binary,0.025226
+search,10000,binary_search,0.029551
+search,1000,two_sum_brute,0.007018
+search,1000,two_sum_fast,0.000353
+search,10000,two_sum_brute,0.004818
+search,10000,two_sum_fast,0.000024
 ```
