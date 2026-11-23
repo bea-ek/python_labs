@@ -81,7 +81,6 @@ def student_from_dict(d: dict) -> dict:
     if missing:
         raise ValueError(f'отсутствуют ключи: {missing}')
     rec = make_student(d['fio'], d['birthdate'], d['group'], float(d['gpa']))
-    validate_student(rec)
     return rec
 
 def format_student(rec):
@@ -108,4 +107,5 @@ if __name__ == '__main__':
     # 4. Проверка даты рождения
     age = student_age(student) 
     print('Возраст студента:', age)
+    
 # python3 -m src.lab08.models
