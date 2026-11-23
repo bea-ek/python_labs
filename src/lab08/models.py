@@ -97,15 +97,24 @@ def format_student(rec):
 
 
 if __name__ == '__main__':
-    # 1. создание корректного студента
-    student = make_student('Болдашова Екатерина Алексеевна', '2008-11-06', 'БИВТ-26-6-4', 5.0)
-    print('Создан студент:', student)
+    student_1 = make_student("Иванов Иван Иванович", "2007-05-14", "БИВТ-26-6-1", 4.3)
+    student_age_now = student_age(student_1)
+    student_copy = student_to_dict(student_1)
+    data = {"fio": "Петров Пётр Петрович", "birthdate": "2008-03-26", "respect": "got it", "group": "БИВТ-26-6-6", "gpa": 3.5}
+    student_2 = student_from_dict(data)
+    
+    print(f'''
+    Примермы работы функций модуля "models":
+    
+    make_student("Иванов Иван Иванович", "2007-05-14", "БИВТ-26-6-1", 4.3) -> {student_1}
+    student_age(student_1) -> {student_age_now}
+    student_to_dict(student_1) -> {student_copy}
+    data = {{"fio": "Петров Пётр Петрович", "birthdate": "2008-03-26", "respect": "got it", "group": "БИВТ-26-6-6", "gpa": 3.5}}
+    student_from_dict(data) -> {student_2}
+    format_student(student_2) -> {format_student(student_2)}
+    ''')
 
-    # 2. Форматирование
-    print('Форматирование:', format_student(student))
+    
 
-    # 4. Проверка даты рождения
-    age = student_age(student) 
-    print('Возраст студента:', age)
     
 # python3 -m src.lab08.models
