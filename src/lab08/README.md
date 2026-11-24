@@ -64,8 +64,21 @@ def student_age(rec, today=None):
     Вычисление возраста студента, по умолчанию, на сегодня.
     При желании посчитать на другой день - задать явно через параметр today.
     '''
-    today = today or date.today()
-    born = date.fromisoformat(rec['birthdate'])
+    
+    birthdate = rec['birthdate']
+    if not today:
+        today = date.today()
+    else: 
+        try:
+            today = date.fromisoformat(today)   
+        except ValueError:
+            raise ValueError(f'today: некорректная дата {today}, требуется формат YYYY-MM-DD')
+    try:
+        born = date.fromisoformat(birthdate)   
+    except ValueError:
+        raise ValueError(f'birthdate: некорректная дата {birthdate}, требуется формат YYYY-MM-DD')
+    if born > date.today():
+        raise ValueError(f'{birthdate} дата из будущего')
     had_birthday = (today.month, today.day) >= (born.month, born.day)
     if had_birthday == True:
         return today.year - born.year
